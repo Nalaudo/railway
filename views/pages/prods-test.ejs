@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prods Tets</title>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body style="margin: 0px">
+    <%- include('../partials/navbar', {email: email}); %>
+    <main>
+      <table style="width: 45%">
+        <tr>
+          <th style="width: 15%">Título</th>
+          <th style="width: 15%">Precio</th>
+          <th style="width: 15%">Imagen</th>
+        </tr>
+        <% fakerProds.forEach(element => { %>
+        <tr>
+          <td style="width: 15%"><%=element.title%></td>
+          <td style="width: 15%">$<%= element.price%></td>
+          <td style="width: 15%">
+            <img style="max-height: 5vh" src="<%= element.thumbnail%>" />
+          </td>
+        </tr>
+        <% }) %>
+      </table>
+    </main>
+    <%- include('../partials/footer'); %>
+  </body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Socket</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="../../public/index.js"></script>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+      }
+      #in-id {
+        pointer-events: none;
+      }
+    </style>
+  </head>
+
+  <body style="margin: 0px">
+    <%- include('../partials/navbar', {email: email}); %>
+    <main style="background-color: beige">
+      <h1 style="padding: 10px; margin: 0px">PUERTO <%= port %></h1>
+      <% if (email) { %>
+      <h1 style="padding: 10px; margin: 0px; background-color: aqua">
+        Bienvenido <%= email %>
+      </h1>
+      <h1 style="padding: 10px; margin: 0px">Agregar producto</h1>
+      <form style="padding: 20px 0px 20px 10px" onsubmit="return agregar()">
+        <label>Título:</label>
+        <input id="in-title" type="text" name="title" />
+        <label>Precio:</label>
+        <input id="in-price" type="number" name="price" />
+        <label>Foto:</label>
+        <input id="in-thumbnail" type="text" name="thumbnail" />
+        <input type="submit" value="Enviar" />
+      </form>
+      <h1 style="padding: 10px; margin: 0px">Listado de productos</h1>
+      <% } else { %>
+      <h1 style="padding: 10px; margin: 0px">Listado de productos</h1>
+      <h2 style="padding: 10px; margin: 0px">
+        Para agregar productos debes tener una cuenta.
+      </h2>
+      <% } %>
+      <table style="width: 45%">
+        <tr>
+          <th style="width: 15%">Título</th>
+          <th style="width: 15%">Precio</th>
+          <th style="width: 15%">Imagen</th>
+        </tr>
+      </table>
+      <table id="table-products" style="width: 45%"></table>
+      <h1 style="padding: 10px; margin: 0px">Centro de mensajes</h1>
+      <% if (email) { %>
+      <form style="padding: 20px 0px 20px 10px" onsubmit="return enviar()">
+        <label>Email:</label>
+        <input
+          id="in-id"
+          type="email"
+          name="id"
+          required
+          value="<%= email %>"
+          readonly
+        />
+
+        <label>Nombre:</label>
+        <input id="in-nombre" type="text" name="nombre" required />
+
+        <label>Apellido:</label>
+        <input id="in-apellido" type="text" name="apellido" required />
+
+        <label>Edad:</label>
+        <input id="in-edad" type="number" name="edad" required />
+
+        <label>Alias:</label>
+        <input id="in-alias" type="text" name="alias" required />
+
+        <label>Avatar link:</label>
+        <input id="in-avatar" type="text" name="avatar" required />
+
+        <label>Mensaje:</label>
+        <input id="in-text" type="text" name="text" required />
+        <input type="submit" value="Enviar" />
+      </form>
+      <% } else { %>
+      <h2 style="padding: 10px; margin: 0px">
+        Para enviar mensajes debes tener una cuenta.
+      </h2>
+      <% } %>
+      <div id="div-msg" style="height: 300px; overflow: scroll"></div>
+    </main>
+    <%- include('../partials/footer'); %>
+  </body>
+</html>

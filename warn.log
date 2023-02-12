@@ -1,0 +1,4 @@
+{"level":"warn","message":"Ruta /aaaa no encontrada con método: GET"}
+{"level":"warn","message":"Ruta /randoms no encontrada con método: GET"}
+{"level":"warn","message":"Ruta /favicon.ico no encontrada con método: GET"}
+{"level":"warn","message":"Ruta /cgi-bin/downloadFlile.cgi no encontrada con método: GET"}

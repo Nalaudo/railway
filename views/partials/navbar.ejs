@@ -1,0 +1,13 @@
+<nav style="background-color: black">
+  <div style="color: white; text-align: center; padding: 5px">
+    <% if (email) { %>
+    <a style="color: white; margin: 5px" href="/">Inicio</a>
+    <a style="color: white; margin: 5px" href="/profile">Perfil</a>
+    <a style="color: white; margin: 5px" href="/logout">Logout</a>
+    <% } else { %>
+    <a style="color: white; margin: 5px" href="/">Inicio</a>
+    <a style="color: white; margin: 5px" href="/login">Iniciar Sesión</a>
+    <a style="color: white; margin: 5px" href="/signup">Registrarse</a>
+    <% } %>
+  </div>
+</nav>
