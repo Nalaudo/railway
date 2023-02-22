@@ -2,7 +2,13 @@
   <div style="color: white; text-align: center; padding: 5px">
     <% if (email) { %>
     <a style="color: white; margin: 5px" href="/">Inicio</a>
+    <select style="margin: 5px" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+      <option value="">Selecciona la categoría</option></a>
+      <option value="/organics">Organicos</option></a>
+      <option value="/inorganics">Inorganicos</option></a>
+    </select>
     <a style="color: white; margin: 5px" href="/profile">Perfil</a>
+    <a style="color: white; margin: 5px" href="/cart">Carrito</a>
     <a style="color: white; margin: 5px" href="/logout">Logout</a>
     <% } else { %>
     <a style="color: white; margin: 5px" href="/">Inicio</a>

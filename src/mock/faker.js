@@ -1,4 +1,5 @@
 const faker = require('faker');
+const logger = require('../config/logger');
 
 const fakerMocks = () => {
     let products = [];

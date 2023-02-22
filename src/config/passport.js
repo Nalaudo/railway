@@ -1,6 +1,8 @@
 const LocalStrategy = require('passport-local').Strategy;
 const Users = require('../models/users');
 const bcrypt = require('bcrypt');
+const mailer = require('./nodemailer');
+const logger = require('./logger');
 
 module.exports = (passport) => {
     function createHash(password) {
@@ -26,12 +28,12 @@ module.exports = (passport) => {
                     return done(err);
 
                 if (!user) {
-                    console.log('User Not Found with email ' + email);
+                    logger.error('User Not Found with email ' + email);
                     return done(null, false);
                 }
 
                 if (!isValidPassword(user, password)) {
-                    console.log('Invalid password');
+                    logger.error('Invalid password');
                     return done(null, false);
                 }
 
@@ -52,28 +54,35 @@ module.exports = (passport) => {
                     const { passwordRepeat } = req.body
                     if (password === passwordRepeat) {
                         if (err) {
-                            console.log('Error in SignUp: ' + err);
+                            logger.error('Error in SignUp: ' + err);
                             return done(err);
                         }
 
                         if (user) {
-                            console.log('User already exists');
+                            logger.error('User already exists');
                             return done(null, false)
                         }
 
                         const newUser = {
                             email: email,
                             password: createHash(password),
+                            nombre: req.body.name,
+                            direccion: req.body.adress,
+                            edad: req.body.age,
+                            telefono: '+' + `${req.body.countryCode}` + `${req.body.phone}`,
+                            avatar: req.file
                         };
+
                         Users.create(newUser, (err, userWithId) => {
                             if (err) {
-                                console.log('Error in Saving user: ' + err);
+                                logger.error('Error in Saving user: ' + err);
                                 return done(err);
                             }
-                            console.log(user + '1121212121')
-                            console.log('User Registration succesful');
+                            mailer(userWithId, null, 'signupMail')
+                            logger.error('User Registration succesful');
                             return done(null, userWithId);
                         });
+
                     } else {
                         return done(null, false)
                     }

@@ -1,6 +1,6 @@
+const logger = require('../config/logger');
 const Conatiner = require('../container');
 const users = new Conatiner("users")
-
 async function auth(req, res, next) {
     if (req.isAuthenticated()) {
         return next()

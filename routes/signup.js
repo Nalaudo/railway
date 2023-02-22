@@ -1,5 +1,6 @@
 const passportAuth = require('../src/middleware/passportAuth');
 const logger = require('../src/config/logger');
+const upload = require('../src/config/multer');
 
 module.exports = function signup(app) {
     app.get('/signup', (req, res) => {
@@ -14,7 +15,7 @@ module.exports = function signup(app) {
     app.get('/failSignup', (req, res) => {
         res.render("pages/fail-signup");
     });
-    app.post('/signup', passportAuth.signupAuth(), (req, res) => {
+    app.post('/signup', upload, passportAuth.signupAuth(), (req, res) => {
         res.redirect('/profile');
     });
 }

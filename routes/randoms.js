@@ -6,7 +6,7 @@ module.exports = function randoms(app) {
         logger.info('Ruta: ' + req.originalUrl + ' - Método: ' + req.method)
         let cant = req.query.cant
         const msg = 'start'
-        let randoms = fork('./src/utils/randoms');
+        let randoms = fork('./src/config/randoms');
         const port = process.argv[2]
         if (cant) {
             randoms.send({ msg, cant });

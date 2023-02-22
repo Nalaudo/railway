@@ -19,11 +19,10 @@ socket.on("arr-chat", (data) => {
 function agregar() {
     const title = document.getElementById("in-title").value;
     const rawPrice = document.getElementById("in-price").value;
+    const category = document.getElementById("in-category").value;
     const thumbnail = document.getElementById("in-thumbnail").value;
     const price = +rawPrice
-    console.log(price)
-    console.log({ title, price, thumbnail })
-    socket.emit("data-productos", { title, price, thumbnail });
+    socket.emit("data-productos", { title, price, category, thumbnail });
     return false;
 }
 

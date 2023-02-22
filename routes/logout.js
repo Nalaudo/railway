@@ -6,7 +6,7 @@ module.exports = function logout(app) {
         logger.info('Ruta: ' + req.originalUrl + ' - Método: ' + req.method)
         const email = req.user?.email;
         req.logout(function (err) {
-            if (err) console.log(err);
+            if (err) logger.info(err);
             else res.render('pages/logout', { email });
         });
     });

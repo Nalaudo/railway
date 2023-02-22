@@ -2,16 +2,18 @@
 //SERVER
 /*-------------------------*/
 const logger = require('./src/config/logger');
-const config = require('./src/config/config')
+const config = require('./src/config/config');
 const express = require('express');
 const session = require('express-session');
-const compression = require('compression')
+const compression = require('compression');
 const app = express();
 const server = require("http").createServer(app);
+
 server.listen(config.PORT, () => {
     console.log(`Server: http://localhost:${config.PORT}`);
 });
-app.use(compression())
+
+app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/public', express.static(__dirname + '/public'));
@@ -21,7 +23,7 @@ app.set('view engine', 'ejs');
 //DB
 /*-------------------------*/
 const MongoStore = require('connect-mongo');
-require('./src/utils/mongoConnect');
+require('./src/config/mongoConnect');
 const Conatiner = require('./src/container');
 const prods = new Conatiner("products");
 const msgs = new Conatiner("messages");
@@ -65,7 +67,7 @@ io.on("connection", async (socket) => {
             const getChats = await msgs.getAll();
             const normalizedChats = normalize(getChats, chatSchema);
             return normalizedChats;
-        }
+        };
         io.sockets.emit("arr-producto", await prods.getAll());
         io.sockets.emit("arr-chat", (await normalizr()).entities.chats.undefined);
 
@@ -78,8 +80,8 @@ io.on("connection", async (socket) => {
             io.sockets.emit("arr-chat", (await normalizr()).entities.chats.undefined);
         });
     } catch (error) {
-        logger.error(error)
-    }
+        logger.error(error);
+    };
 });
 
 /*-------------------------*/

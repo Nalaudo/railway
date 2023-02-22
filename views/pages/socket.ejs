@@ -22,7 +22,6 @@
   <body style="margin: 0px">
     <%- include('../partials/navbar', {email: email}); %>
     <main style="background-color: beige">
-      <h1 style="padding: 10px; margin: 0px">PUERTO <%= port %></h1>
       <% if (email) { %>
       <h1 style="padding: 10px; margin: 0px; background-color: aqua">
         Bienvenido <%= email %>
@@ -33,6 +32,11 @@
         <input id="in-title" type="text" name="title" />
         <label>Precio:</label>
         <input id="in-price" type="number" name="price" />
+        <label>Categoría:</label>
+        <select name="category" id="in-category">
+          <option value="organic" Selected>Orgánico</option>
+          <option value="inorganic">Inorgánico</option>
+        </select>
         <label>Foto:</label>
         <input id="in-thumbnail" type="text" name="thumbnail" />
         <input type="submit" value="Enviar" />

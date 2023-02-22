@@ -90,7 +90,7 @@ class Container {
         try {
             const carritos = await this.getAll();
             const carritoEncontrado = carritos.find((e) => e.id == id);
-            if (!carritoEncontrado) return console.log("el id no existe");
+            if (!carritoEncontrado) return logger.info("el id no existe");
             const prods = carritoEncontrado.prods;
             const carritosFiltrados = prods.filter((e) => e.id != id_prod);
             await Messages.findByIdAndUpdate(
@@ -99,7 +99,7 @@ class Container {
                     prods: carritosFiltrados
                 }
             );
-            console.log("producto borrado");
+            logger.info("producto borrado");
         } catch (e) {
             logger.error(e);
         };
@@ -114,7 +114,7 @@ class Container {
             } else if (this.coll == "users") {
                 res = await Users.deleteOne({ _id: id });
             };
-            console.log("item borrado");
+            logger.info("item borrado");
         } catch (e) {
             logger.error(e);
         };
@@ -129,7 +129,7 @@ class Container {
             } else if (this.coll == "users") {
                 res = await Users.deleteMany({});
             };
-            console.log("se borraron todos los items");
+            logger.info("se borraron todos los items");
         } catch (e) {
             logger.error(e);
         };
